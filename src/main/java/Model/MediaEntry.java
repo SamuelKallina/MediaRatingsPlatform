@@ -16,7 +16,6 @@ public abstract class MediaEntry extends BaseEntity {
     private User creator;
     private double avgScore;
     private int favCount;
-    private Set<User> favouritedBy = new HashSet<>();
 
     public MediaEntry(
             String title,
