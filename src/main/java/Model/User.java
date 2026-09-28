@@ -1,6 +1,5 @@
 package Model;
 
-import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,46 +24,10 @@ public class User extends BaseEntity{
         favourites.add(mediaEntry);
     }
 
-    public void viewProfile(UserProfile userProfile) {
-        notNull(userProfile, "User profile");
-        System.out.println(userProfile);
+    public void removeFromFavourites(MediaEntry mediaEntry) {
+        notNull(mediaEntry, "Media entry");
+        favourites.remove(mediaEntry);
     }
-
-    public void editProfile() {} //TODO
-
-    public void createMedia(){} //TODO
-
-    public void updateMedia(){} //TODO
-
-    public void deleteMedia(MediaEntry mediaEntry){} //TODO
-
-    public void rateMedia(MediaEntry mediaEntry, int stars){} //TODO
-
-    public void editRating(){} //TODO
-
-    public void deleteRating(){} //TODO
-
-    public void likeRating(){} //TODO (only once per Rating
-
-    public void viewRatingHistory(){} //TODO
-
-    public void viewFavourites(){
-        notNull(favourites, "User favourites");
-        System.out.println(favourites);
-    }
-
-    public void viewStatistics(){} //TODO
-
-
-    public void writeComment(String comment){} //TODO
-
-
-
-
-
-
-
-
 
 
 
