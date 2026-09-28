@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-public class MediaEntry extends BaseEntity{
+public abstract class MediaEntry extends BaseEntity{
     private String title;
     private String description;
     private Set<Rating> ratings = new HashSet<Rating>();

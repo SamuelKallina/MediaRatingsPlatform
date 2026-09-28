@@ -1,4 +1,6 @@
 package Model;
 
-public class Movie {
+public class Movie extends MediaEntry{
+    private int lengthInMinutes;
+
 }
