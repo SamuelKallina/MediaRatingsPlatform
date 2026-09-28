@@ -2,7 +2,6 @@ package Model;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 import static Exception.RatingException.ratingNotNull;
 
@@ -38,18 +37,22 @@ public abstract class MediaEntry extends BaseEntity {
 
     // Methods & logic
     public double calcAvgScore() {
-        if (ratings.isEmpty()) {
-            return 0;
-        }
-
         double sum = 0;
+        int confirmedRatings = 0;
 
         for (Rating rating : ratings) {
-            sum += rating.getStars();
+            if (rating.isConfirmed()) {
+                sum += rating.getStars();
+                confirmedRatings++;
+            }
         }
 
-        avgScore = sum / ratings.size();
+        if (confirmedRatings == 0) {
+            avgScore = 0;
+            return avgScore;
+        }
 
+        avgScore = sum / confirmedRatings;
         return avgScore;
     }
 
@@ -59,7 +62,7 @@ public abstract class MediaEntry extends BaseEntity {
         calcAvgScore();
     }
 
-    public int countFavCount() { //TODO
+    public int countFavCount() { //TODO maybe in service
         return favCount;
     }
 
@@ -70,7 +73,7 @@ public abstract class MediaEntry extends BaseEntity {
     }
 
     public void addGenre(Genre genre) {
-        if (!genres.contains(genre) && genre != null) {
+        if (genre != null) {
             genres.add(genre);
         }
     }
@@ -116,7 +119,11 @@ public abstract class MediaEntry extends BaseEntity {
     }
 
     public void setGenres(Set<Genre> genres) {
-        this.genres = genres;
+        if (genres == null) {
+            this.genres = new HashSet<>();
+        } else {
+            this.genres = genres;
+        }
     }
 
     public int getAgeRestr() {
@@ -135,7 +142,7 @@ public abstract class MediaEntry extends BaseEntity {
         this.creator = creator;
     }
 
-    public double getAvgScore() {
+    public double getAvgSco re() {
         return avgScore;
     }
 
