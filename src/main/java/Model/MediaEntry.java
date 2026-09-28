@@ -142,7 +142,7 @@ public abstract class MediaEntry extends BaseEntity {
         this.creator = creator;
     }
 
-    public double getAvgSco re() {
+    public double getAvgScore() {
         return avgScore;
     }
 
