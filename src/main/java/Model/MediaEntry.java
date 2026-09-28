@@ -1,45 +1,93 @@
 package Model;
 
-import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
-public abstract class MediaEntry extends BaseEntity{
+import static Exception.RatingException.ratingNotNull;
+
+public abstract class MediaEntry extends BaseEntity {
     private String title;
     private String description;
     private Set<Rating> ratings = new HashSet<Rating>();
-    private String type;
-    private LocalDateTime releaseYear;
+    private int releaseYear;
     private Set<Genre> genres = new HashSet<Genre>();
     private int ageRestr;
-    private int creatorId;
-    private float avgScore;
+    private User creator;
+    private double avgScore;
     private int favCount;
+    private Set<User> favouritedBy = new HashSet<>();
 
-    public MediaEntry() {
+    public MediaEntry(
+            String title,
+            String description,
+            int releaseYear,
+            Set<Genre> genres,
+            int ageRestr,
+            User creator
+    ) {
         super();
+
+        setTitle(title);
+        setDescription(description);
+        setReleaseYear(releaseYear);
+        setGenres(genres);
+        setAgeRestr(ageRestr);
+        setCreator(creator);
     }
 
 
     // Methods & logic
-    public float calcAvgScore() { //TODO
-        return 0;
+    public double calcAvgScore() {
+        if (ratings.isEmpty()) {
+            return 0;
+        }
+
+        double sum = 0;
+
+        for (Rating rating : ratings) {
+            sum += rating.getStars();
+        }
+
+        avgScore = sum / ratings.size();
+
+        return avgScore;
+    }
+
+    public void addRating(Rating rating) {
+        ratingNotNull(rating);
+        ratings.add(rating);
+        calcAvgScore();
     }
 
     public int countFavCount() { //TODO
         return favCount;
     }
 
+    public void removeRating(Rating rating) {
+        ratingNotNull(rating);
+        ratings.remove(rating);
+        calcAvgScore();
+    }
 
+    public void addGenre(Genre genre) {
+        if (!genres.contains(genre) && genre != null) {
+            genres.add(genre);
+        }
+    }
 
-
-
+    public void removeGenre(Genre genre) {
+        if (genre != null) {
+            genres.remove(genre);
+        }
+    }
 
 
     //getter & setter
     public String getTitle() {
         return title;
     }
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -47,6 +95,7 @@ public abstract class MediaEntry extends BaseEntity{
     public String getDescription() {
         return description;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }
@@ -55,16 +104,11 @@ public abstract class MediaEntry extends BaseEntity{
         return ratings;
     }
 
-    public String getType() {
-        return type;
-    }
-    public void setType(String type) {
-        this.type = type;
-    }
-    public LocalDateTime getReleaseYear() {
+    public int getReleaseYear() {
         return releaseYear;
     }
-    public void setReleaseYear(LocalDateTime releaseYear) {
+
+    public void setReleaseYear(int releaseYear) {
         this.releaseYear = releaseYear;
     }
 
@@ -72,20 +116,27 @@ public abstract class MediaEntry extends BaseEntity{
         return genres;
     }
 
+    public void setGenres(Set<Genre> genres) {
+        this.genres = genres;
+    }
+
     public int getAgeRestr() {
         return ageRestr;
     }
+
     public void setAgeRestr(int ageRestr) {
         this.ageRestr = ageRestr;
     }
-    public int getCreatorId() {
-        return creatorId;
-    }
-    public void setCreatorId(int creatorId) { //TODO find out if needed
-        this.creatorId = creatorId;
+
+    public User getCreator() {
+        return creator;
     }
 
-    public float getAvgScore() {
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
+
+    public double getAvgScore() {
         return avgScore;
     }
 
