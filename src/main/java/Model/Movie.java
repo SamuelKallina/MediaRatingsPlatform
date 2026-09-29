@@ -8,15 +8,7 @@ public class Movie extends MediaEntry {
 
     private int lengthInMinutes;
 
-    public Movie(
-            String title,
-            String description,
-            int releaseYear,
-            Set<Genre> genres,
-            int ageRestr,
-            User creator,
-            int lengthInMinutes
-    ) {
+    public Movie(String title, String description, int releaseYear, Set<Genre> genres, int ageRestr, User creator, int lengthInMinutes) {
         super(title, description, releaseYear, genres, ageRestr, creator);
         setLengthInMinutes(lengthInMinutes);
     }
@@ -29,5 +21,24 @@ public class Movie extends MediaEntry {
         movieLengthValid(lengthInMinutes);
 
         this.lengthInMinutes = lengthInMinutes;
+    }
+
+    public Movie(String title, String description, int releaseYear, Set<Genre> genres, int ageRestr, User creator) {
+        super(title, description, releaseYear, genres, ageRestr, creator);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }

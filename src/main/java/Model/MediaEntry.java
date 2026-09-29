@@ -16,14 +16,7 @@ public abstract class MediaEntry extends BaseEntity {
     private double avgScore;
     private int favCount;
 
-    public MediaEntry(
-            String title,
-            String description,
-            int releaseYear,
-            Set<Genre> genres,
-            int ageRestr,
-            User creator
-    ) {
+    public MediaEntry(String title, String description, int releaseYear, Set<Genre> genres, int ageRestr, User creator) {
         super();
 
         setTitle(title);
