@@ -1,6 +1,6 @@
 package Model;
 
-public class RatingLike extends BaseEntity {
+public class RatingLike extends BaseEntity { //TODO find out if this is needed
 
     private User user;
     private Rating rating;

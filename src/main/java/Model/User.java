@@ -21,6 +21,7 @@ public class User extends BaseEntity{
     //Methods / logic
 
     public void addToFavourites(MediaEntry mediaEntry) {
+        notNull(mediaEntry, "Media entry");
         favourites.add(mediaEntry);
     }
 
