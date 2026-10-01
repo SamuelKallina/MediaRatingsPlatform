@@ -19,6 +19,16 @@ public class Rating {
         setConfirmed(false);
     }
 
+    public Rating(User user, MediaEntry mediaEntry, int stars) {
+        super();
+
+        setUser(user);
+        setMediaEntry(mediaEntry);
+        setStars(stars);
+        setComment("");
+        setConfirmed(false);
+    }
+
 
 
 
