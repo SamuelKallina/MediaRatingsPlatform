@@ -1,7 +1,9 @@
 package model;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 import static exception.RatingException.ratingNotNull;
 
@@ -18,6 +20,17 @@ public abstract class MediaEntry extends BaseEntity {
 
     public MediaEntry(String title, String description, int releaseYear, Set<Genre> genres, int ageRestr, User creator) {
         super();
+
+        setTitle(title);
+        setDescription(description);
+        setReleaseYear(releaseYear);
+        setGenres(genres);
+        setAgeRestr(ageRestr);
+        setCreator(creator);
+    }
+
+    public MediaEntry(UUID id, LocalDateTime createdAt, String title, String description, int releaseYear, Set<Genre> genres, int ageRestr, User creator) {
+        super(id, createdAt);
 
         setTitle(title);
         setDescription(description);

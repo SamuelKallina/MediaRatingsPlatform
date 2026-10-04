@@ -1,6 +1,8 @@
 package model;
 
+import java.time.LocalDateTime;
 import java.util.Set;
+import java.util.UUID;
 
 import static exception.MediaEntryException.gamePlayTimeValid;
 
@@ -10,6 +12,21 @@ public class Game extends MediaEntry {
 
     public Game(String title, String description, int releaseYear, Set<Genre> genres, int ageRestr, User creator, int playTimeInHours) {
         super(title, description, releaseYear, genres, ageRestr, creator);
+        setPlayTimeInHours(playTimeInHours);
+    }
+
+    public Game(UUID id, LocalDateTime createdAt, String title, String description, int releaseYear, Set<Genre> genres, int ageRestr, User creator, int playTimeInHours) {
+        super(
+                id,
+                createdAt,
+                title,
+                description,
+                releaseYear,
+                genres,
+                ageRestr,
+                creator
+        );
+
         setPlayTimeInHours(playTimeInHours);
     }
 

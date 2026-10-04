@@ -1,6 +1,8 @@
 package model;
 
+import java.time.LocalDateTime;
 import java.util.Set;
+import java.util.UUID;
 
 import static exception.MediaEntryException.movieLengthValid;
 
@@ -10,6 +12,21 @@ public class Movie extends MediaEntry {
 
     public Movie(String title, String description, int releaseYear, Set<Genre> genres, int ageRestr, User creator, int lengthInMinutes) {
         super(title, description, releaseYear, genres, ageRestr, creator);
+        setLengthInMinutes(lengthInMinutes);
+    }
+
+    public Movie(UUID id, LocalDateTime createdAt, String title, String description, int releaseYear,  Set<Genre> genres, int ageRestr,  User creator, int lengthInMinutes) {
+        super(
+                id,
+                createdAt,
+                title,
+                description,
+                releaseYear,
+                genres,
+                ageRestr,
+                creator
+        );
+
         setLengthInMinutes(lengthInMinutes);
     }
 
