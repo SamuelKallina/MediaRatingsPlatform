@@ -1,20 +1,24 @@
 package service;
 
-import model.MediaEntry;
-import model.Rating;
+import model.User;
 import model.UserProfile;
 
 import java.util.Set;
+import java.util.UUID;
+import model.MediaEntry;
+import model.Rating;
 
 public interface UserService {
 
-    UserProfile getProfile();
+    User register(String userName, String passwordHash, String nameTag);
 
-    void editProfile(String nameTag);
+    UserProfile getProfile(UUID userId);
 
-    Set<Rating> getRatingHistory();
+    void editProfile(UUID userId, String nameTag);
 
-    Set<MediaEntry> getFavourites();
+    Set<Rating> getRatingHistory(UUID userId);
 
-    UserProfile getStatistics();
+    Set<MediaEntry> getFavourites(UUID userId);
+
+    UserProfile getStatistics(UUID userId);
 }

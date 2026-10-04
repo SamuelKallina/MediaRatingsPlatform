@@ -39,6 +39,38 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public User update(User user) {
+        String sql = """
+            UPDATE users
+            SET username = ?,
+                password_hash = ?,
+                name_tag = ?
+            WHERE id = ?
+            """;
+
+        try (
+                Connection connection = DatabaseConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sql)
+        ) {
+            statement.setString(1, user.getUserName());
+            statement.setString(2, user.getPasswordHash());
+            statement.setString(3, user.getNameTag());
+            statement.setObject(4, user.getId());
+
+            int affectedRows = statement.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new RuntimeException("User not found");
+            }
+
+            return user;
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Could not update user", e);
+        }
+    }
+
+    @Override
     public Optional<User> findById(UUID id) {
         String sql = """
                 SELECT *
