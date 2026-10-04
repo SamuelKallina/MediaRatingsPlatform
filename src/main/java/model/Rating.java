@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import static exception.RatingException.isCorrectStarValue;
 
-public class Rating {
+public class Rating extends BaseEntity {
     private User user; //is the owner
     private MediaEntry mediaEntry;
     private int stars;
