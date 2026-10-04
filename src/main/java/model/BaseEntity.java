@@ -5,12 +5,19 @@ import java.util.UUID;
 
 public abstract class BaseEntity {
 
-    protected UUID id = UUID.randomUUID();
-    protected LocalDateTime createdAt = LocalDateTime.now();
+    protected UUID id;
+    protected LocalDateTime createdAt;
+
 
     public BaseEntity() {
         this.id = UUID.randomUUID();
         this.createdAt = LocalDateTime.now();
+    }
+
+    // Database stuff
+    public BaseEntity(UUID id, LocalDateTime createdAt) {
+        this.id = id;
+        this.createdAt = createdAt;
     }
 
     public UUID getId() {

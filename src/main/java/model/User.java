@@ -1,18 +1,29 @@
 package model;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 import static exception.UserException.notNull;
 
-public class User extends BaseEntity{
+public class User extends BaseEntity {
     private String userName;
     private String passwordHash; //TODO passwordEncoader.hash yada yada yada
     private String nameTag;
-    private Set<MediaEntry> favourites= new HashSet<MediaEntry>();
+    private Set<MediaEntry> favourites = new HashSet<MediaEntry>();
 
     public User(String userName, String passwordHash, String nameTag) {
         super();
+        setUserName(userName);
+        setPasswordHash(passwordHash);
+        setNameTag(nameTag);
+    }
+
+    //database constructor
+    public User(UUID id, LocalDateTime createdAt, String userName, String passwordHash, String nameTag) {
+        super(id, createdAt);
+
         setUserName(userName);
         setPasswordHash(passwordHash);
         setNameTag(nameTag);
@@ -29,10 +40,6 @@ public class User extends BaseEntity{
         notNull(mediaEntry, "Media entry");
         favourites.remove(mediaEntry);
     }
-
-
-
-
 
 
     //getter & setter

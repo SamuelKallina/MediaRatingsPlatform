@@ -1,33 +1,130 @@
 package repository;
 
+import database.DatabaseConnection;
 import model.User;
 
+import java.sql.*;
 import java.util.Optional;
 import java.util.UUID;
 
 public class UserRepositoryImpl implements UserRepository {
 
     @Override
-    public User save(User user) {// TODO PostgreSQL INSERT / UPDATE
-        return user;
+    public User save(User user) {
+        String sql = """
+                INSERT INTO users (id, username, password_hash, name_tag, created_at)
+                VALUES (?, ?, ?, ?, ?)
+                """;
+
+        try (
+                Connection connection = DatabaseConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sql)
+        ) {
+            statement.setObject(1, user.getId());
+            statement.setString(2, user.getUserName());
+            statement.setString(3, user.getPasswordHash());
+            statement.setString(4, user.getNameTag());
+            statement.setTimestamp(
+                    5,
+                    Timestamp.valueOf(user.getCreatedAt())
+            );
+
+            statement.executeUpdate();
+
+            return user;
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Could not save user", e);
+        }
     }
 
     @Override
-    public Optional<User> findById(UUID id) {// TODO SELECT
-        return Optional.empty();
+    public Optional<User> findById(UUID id) {
+        String sql = """
+                SELECT *
+                FROM users
+                WHERE id = ?
+                """;
+
+        try (
+                Connection connection = DatabaseConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sql)
+        ) {
+            statement.setObject(1, id);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return Optional.of(mapUser(resultSet));
+                }
+            }
+
+            return Optional.empty();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Could not find user by id", e);
+        }
     }
 
     @Override
-    public Optional<User> findByUserName(String userName) {// TODO SELECT
-        return Optional.empty();
+    public Optional<User> findByUserName(String userName) {
+        String sql = """
+                SELECT *
+                FROM users
+                WHERE username = ?
+                """;
+
+        try (
+                Connection connection = DatabaseConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sql)
+        ) {
+            statement.setString(1, userName);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return Optional.of(mapUser(resultSet));
+                }
+            }
+
+            return Optional.empty();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Could not find user by username", e);
+        }
     }
 
     @Override
-    public boolean existsByUserName(String userName) {// TODO SELECT EXISTS
-        return false;
+    public boolean existsByUserName(String userName) {
+        String sql = """
+                SELECT EXISTS(
+                    SELECT 1
+                    FROM users
+                    WHERE username = ?
+                )
+                """;
+
+        try (
+                Connection connection = DatabaseConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sql)
+        ) {
+            statement.setString(1, userName);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                resultSet.next();
+                return resultSet.getBoolean(1);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Could not check username", e);
+        }
     }
 
-    @Override
-    public void deleteById(UUID id) {// TODO DELETE
+    private User mapUser(ResultSet resultSet) throws SQLException {
+        return new User(
+                resultSet.getObject("id", UUID.class),
+                resultSet.getTimestamp("created_at").toLocalDateTime(),
+                resultSet.getString("username"),
+                resultSet.getString("password_hash"),
+                resultSet.getString("name_tag")
+        );
     }
 }

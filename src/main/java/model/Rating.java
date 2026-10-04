@@ -1,5 +1,8 @@
 package model;
 
+import java.time.LocalDateTime;
+import java.util.UUID;
+
 import static exception.RatingException.isCorrectStarValue;
 
 public class Rating {
@@ -20,13 +23,18 @@ public class Rating {
     }
 
     public Rating(User user, MediaEntry mediaEntry, int stars) {
-        super();
+        this(user, mediaEntry, stars, "");
+    }
+
+    //database constructor
+    public Rating(UUID id, LocalDateTime createdAt, User user, MediaEntry mediaEntry, int stars, String comment, boolean confirmed) {
+        super(id, createdAt);
 
         setUser(user);
         setMediaEntry(mediaEntry);
         setStars(stars);
-        setComment("");
-        setConfirmed(false);
+        setComment(comment);
+        setConfirmed(confirmed);
     }
 
 
