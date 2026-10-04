@@ -1,8 +1,8 @@
-package Model;
+package model;
 
 import java.util.Set;
 
-import static Exception.MediaEntryException.gamePlayTimeValid;
+import static exception.MediaEntryException.gamePlayTimeValid;
 
 public class Game extends MediaEntry {
 

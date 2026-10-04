@@ -1,8 +1,8 @@
-package Controller;
+package controller;
 
-import Model.MediaEntry;
-import Model.Rating;
-import Model.UserProfile;
+import model.MediaEntry;
+import model.Rating;
+import model.UserProfile;
 
 import java.util.Set;
 

@@ -1,9 +1,9 @@
-package Model;
+package model;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import static Exception.RatingException.ratingNotNull;
+import static exception.RatingException.ratingNotNull;
 
 public abstract class MediaEntry extends BaseEntity {
     private String title;

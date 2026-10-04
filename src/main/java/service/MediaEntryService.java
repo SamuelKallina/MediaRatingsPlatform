@@ -1,6 +1,6 @@
-package Service;
+package service;
 
-import Model.MediaEntry;
+import model.MediaEntry;
 
 public interface MediaEntryService {
 

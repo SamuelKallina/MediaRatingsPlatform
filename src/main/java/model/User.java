@@ -1,9 +1,9 @@
-package Model;
+package model;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import static Exception.UserException.notNull;
+import static exception.UserException.notNull;
 
 public class User extends BaseEntity{
     private String userName;

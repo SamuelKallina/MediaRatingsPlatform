@@ -1,8 +1,8 @@
-package Model;
+package model;
 
 import java.util.Set;
 
-import static Exception.MediaEntryException.movieLengthValid;
+import static exception.MediaEntryException.movieLengthValid;
 
 public class Movie extends MediaEntry {
 

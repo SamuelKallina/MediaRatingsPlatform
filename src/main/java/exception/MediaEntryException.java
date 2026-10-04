@@ -1,4 +1,4 @@
-package Exception;
+package exception;
 
 public class MediaEntryException extends RuntimeException{
     public MediaEntryException(String message){

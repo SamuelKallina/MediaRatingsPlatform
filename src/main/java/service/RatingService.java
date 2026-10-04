@@ -1,8 +1,8 @@
-package Service;
+package service;
 
-import Model.MediaEntry;
-import Model.Rating;
-import Model.User;
+import model.MediaEntry;
+import model.Rating;
+import model.User;
 
 public interface RatingService {
 

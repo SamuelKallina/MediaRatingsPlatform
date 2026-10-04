@@ -1,8 +1,8 @@
-package Model;
+package model;
 
 import java.util.Set;
 
-import static Exception.MediaEntryException.seriesEpisodesValid;
+import static exception.MediaEntryException.seriesEpisodesValid;
 
 public class Series extends MediaEntry {
 

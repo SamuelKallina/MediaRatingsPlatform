@@ -1,13 +1,13 @@
-package Service;
+package service;
 
-import Model.MediaEntry;
-import Model.Rating;
-import Model.User;
+import model.MediaEntry;
+import model.Rating;
+import model.User;
 
 import java.util.Objects;
 
-import static Exception.MediaEntryException.notNull;
-import static Exception.RatingException.isCorrectStarValue;
+import static exception.MediaEntryException.notNull;
+import static exception.RatingException.isCorrectStarValue;
 
 public class RatingServiceImpl implements RatingService { //TODO
 

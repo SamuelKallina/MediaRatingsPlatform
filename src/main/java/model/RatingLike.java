@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 public class RatingLike extends BaseEntity { //TODO find out if this is needed
 

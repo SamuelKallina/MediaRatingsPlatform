@@ -1,6 +1,6 @@
-package Model;
+package model;
 
-import static Exception.RatingException.isCorrectStarValue;
+import static exception.RatingException.isCorrectStarValue;
 
 public class Rating {
     private User user; //is the owner
