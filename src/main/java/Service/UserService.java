@@ -1,24 +1,20 @@
 package Service;
 
+import Model.MediaEntry;
+import Model.Rating;
 import Model.UserProfile;
 
-import static Exception.UserException.notNull;
+import java.util.Set;
 
-public class UserService {
+public interface UserService {
 
-    public void viewProfile(UserProfile userProfile) {
-        notNull(userProfile, "User profile");
-        System.out.println(userProfile);
-    }
+    UserProfile getProfile();
 
-    public void editProfile() {} //TODO
+    void editProfile(String nameTag);
 
-    public void viewRatingHistory(){} //TODO
+    Set<Rating> getRatingHistory();
 
-//    public void viewFavourites(){ //TODO
-//        notNull(favourites, "User favourites");
-//        System.out.println(favourites);
-//    }
+    Set<MediaEntry> getFavourites();
 
-    public void viewStatistics(){} //TODO
+    UserProfile getStatistics();
 }

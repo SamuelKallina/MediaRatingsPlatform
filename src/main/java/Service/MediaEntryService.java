@@ -2,13 +2,11 @@ package Service;
 
 import Model.MediaEntry;
 
-public class MediaEntryService {
+public interface MediaEntryService {
 
-    public void createMedia(){} //TODO
+    void createMedia();
 
-    public void updateMedia(){} //TODO
+    void updateMedia();
 
-    public void deleteMedia(MediaEntry mediaEntry){} //TODO
-
-
+    void deleteMedia(MediaEntry mediaEntry);
 }
